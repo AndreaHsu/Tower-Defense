@@ -16,13 +16,15 @@
 #include "ExplosionEffect.hpp"
 #include "DirtyEffect.hpp"
 #include "PlayScene.hpp"
+#include "EnemyBullet.hpp"
+#include "AudioHelper.hpp"
 
 
 PlayScene* Turret::getPlayScene() {
 	return dynamic_cast<PlayScene*>(Engine::GameEngine::GetInstance().GetActiveScene());
 }
-Turret::Turret(std::string imgTurret, float x, float y,float radius, int price, float coolDown) :
-	Sprite(imgTurret, x, y), price(price), coolDown(coolDown) {
+Turret::Turret(std::string imgTurret, float x, float y,float radius, int price, float coolDown,float hp) :
+	Sprite(imgTurret, x, y), price(price), coolDown(coolDown),hp(hp) {
 	CollisionRadius = radius;
 }
 void Turret::Update(float deltaTime) {
@@ -82,5 +84,18 @@ void Turret::OnExplode() {
 		// Random add 10 dirty effects.
 		getPlayScene()->GroundEffectGroup->AddNewObject(new DirtyEffect("play/dirty-" + std::to_string(distId(rng)) + ".png", dist(rng), Position.x, Position.y));
 	}
-	getPlayScene()->TowerGroup->RemoveObject(objectIterator);
+}
+void Turret::Hit(float damage) {
+	hp -= damage;
+
+	if (hp <= 0) {
+		OnExplode();
+		// Remove all turret's reference to target.
+		for (auto& it : lockedEnemys)
+			it->Target = nullptr;
+		for (auto& it : lockedEnemyBullets)
+			it->Target = nullptr;
+		getPlayScene()->TowerGroup->RemoveObject(objectIterator);
+		AudioHelper::PlayAudio("explosion.wav");
+	}
 }

@@ -15,7 +15,7 @@
 const int Boon::Price = 20;
 Boon::Boon(float x, float y) :
 	// TODO 2 (2/8): You can imitate the 2 files: 'FreezeTurret.hpp', 'FreezeTurret.cpp' to create a new turret.
-	Turret("play/bomb.png", x, y,150, Price, 0.5) {
+	Turret("play/bomb.png", x, y,150, Price, 0.5,0) {
 	// Move center downward, since we the turret head is slightly biased upward.
 	Anchor.y += 8.0f / GetBitmapHeight();
 }
@@ -31,7 +31,8 @@ void Boon::Update(float deltaTime) {
 			continue;
 		if (Engine::Collider::IsCircleOverlap(Position, CollisionRadius, turret->Position, 0)) {
 			turret->OnExplode();
-			return;
+			turret->Hit(100);
+			//return;
 		}
 	}
 	getPlayScene()->TowerGroup->RemoveObject(objectIterator);

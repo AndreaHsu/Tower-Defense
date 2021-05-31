@@ -17,6 +17,7 @@
 #include "PlayScene.hpp"
 #include "Turret.hpp"
 #include "Collider.hpp"
+#include "EnemyFireBullet.hpp"
 
 PlayScene* Enemy::getPlayScene() {
 	return dynamic_cast<PlayScene*>(Engine::GameEngine::GetInstance().GetActiveScene());
@@ -69,7 +70,33 @@ void Enemy::Update(float deltaTime) {
 			Position.y -= Velocity.y * deltaTime;
 		}
 	}
-		
+	if (Target) {
+		if (Target->Position.x > Position.x && Target->Position.y >= Position.y && Target->Position.y < Position.y + scene->BlockSize) {
+			Target->lockedEnemys.erase(lockedEnemyIterator);
+			Target = nullptr;
+			lockedEnemyIterator = std::list<Enemy*>::iterator();
+		}
+		// Shoot reload.
+		reload -= deltaTime;
+		if (reload <= 0) {
+			// shoot.
+			reload = 3;
+			CreateBullet();
+		}
+	}
+	if (!Target) {
+		// Lock first seen target.
+		// Can be improved by Spatial Hash, Quad Tree, ...
+		// However simply loop through all enemies is enough for this program.
+		for (auto& it : scene->TowerGroup->GetObjects()) {
+			if (it->Position.x < Position.x && it->Position.y <= Position.y && it->Position.y > Position.y - scene->BlockSize) {
+				Target = dynamic_cast<Turret*>(it);
+				Target->lockedEnemys.push_back(this);
+				lockedEnemyIterator = std::prev(Target->lockedEnemys.end());
+				break;
+			}
+		}
+	}
 	if(Position.x <= PlayScene::EndGridPointx * PlayScene::BlockSize + PlayScene::BlockSize / 2){
 		Hit(hp);
 		getPlayScene()->Hit();
@@ -85,4 +112,10 @@ void Enemy::Draw() const {
 		// Draw collision radius.
 		al_draw_circle(Position.x, Position.y, CollisionRadius, al_map_rgb(255, 0, 0), 2);
 	}
+}
+void Enemy::CreateBullet() {
+	Engine::Point diff = Engine::Point(1, 0);
+	float rotation = ALLEGRO_PI / 2;
+	getPlayScene()->EnemyBulletGroup->AddNewObject(new EnemyFireBullet(Position, diff, rotation, this));
+	AudioHelper::PlayAudio("gun.wav");
 }

@@ -8,7 +8,8 @@ protected:
 public:
 	static const int Price;
 	TCellTurret(float x, float y);
-	void CreateBullet();
-	void Update(float deltaTime) override;
+	void CreateBullet() override;
+	//void Update(float deltaTime) override;
+	void Hit(float damage) override;
 };
 #endif // TCELLTURRET_HPP

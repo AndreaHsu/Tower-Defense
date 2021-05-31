@@ -157,6 +157,8 @@
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="DirtyEffect.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyBullet.cpp" />
+    <ClCompile Include="EnemyFireBullet.cpp" />
     <ClCompile Include="ExplosionEffect.cpp" />
     <ClCompile Include="FrenchfriesBullet.cpp" />
     <ClCompile Include="GameEngine.cpp" />
@@ -203,6 +205,8 @@
     <ClInclude Include="Collider.hpp" />
     <ClInclude Include="DirtyEffect.hpp" />
     <ClInclude Include="Enemy.hpp" />
+    <ClInclude Include="EnemyBullet.hpp" />
+    <ClInclude Include="EnemyFireBullet.hpp" />
     <ClInclude Include="ExplosionEffect.hpp" />
     <ClInclude Include="FrenchfriesBullet.hpp" />
     <ClInclude Include="GameEngine.hpp" />

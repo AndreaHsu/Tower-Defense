@@ -20,6 +20,8 @@ protected:
 	int money;
 	PlayScene* getPlayScene();
 	virtual void OnExplode();
+	std::list<Enemy*>::iterator lockedEnemyIterator;
+	float reload = 0;
 public:
 	float reachEndTime;
 	std::list<Turret*> lockedTurrets;
@@ -29,5 +31,7 @@ public:
 	void Update(float deltaTime) override;
 	void Draw() const override;
 	friend  class TCellTurret;
+	virtual void CreateBullet() ;
+	Turret* Target = nullptr;
 };
 #endif // ENEMY_HPP

@@ -151,6 +151,12 @@
     <ClCompile Include="Boon.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyBullet.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyFireBullet.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StageSelectScene.hpp">
@@ -280,6 +286,12 @@
       <Filter>標頭檔</Filter>
     </ClInclude>
     <ClInclude Include="Boon.hpp">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBullet.hpp">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyFireBullet.hpp">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>

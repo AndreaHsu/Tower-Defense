@@ -67,6 +67,7 @@ void PlayScene::Initialize() {
 	AddNewObject(EnemyGroup = new Group());
 	AddNewObject(BulletGroup = new Group());
 	AddNewObject(EffectGroup = new Group());
+	AddNewObject(EnemyBulletGroup = new Group());
 	// Should support buttons.
 	AddNewControlObject(UIGroup = new Group());
 	ReadMap();
@@ -315,6 +316,7 @@ void PlayScene::Hit() {
 			delete EnemyGroup;
 			delete BulletGroup;
 			delete EffectGroup;
+			delete EnemyBulletGroup;
 			delete UIGroup;
 			delete imgTarget;*/
 			Engine::GameEngine::GetInstance().ChangeScene("lose");
