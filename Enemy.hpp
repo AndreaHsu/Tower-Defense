@@ -22,11 +22,12 @@ protected:
 	virtual void OnExplode();
 	std::list<Enemy*>::iterator lockedEnemyIterator;
 	float reload = 0;
+	std::string name;
 public:
 	float reachEndTime;
 	std::list<Turret*> lockedTurrets;
 	std::list<Bullet*> lockedBullets;
-	Enemy(std::string img, float x, float y, float radius, float speed, float hp, int money );
+	Enemy(std::string img, float x, float y, float radius, float speed, float hp, int money , std::string name);
  	void Hit(float damage);
 	void Update(float deltaTime) override;
 	void Draw() const override;

@@ -8,5 +8,6 @@ public:
 	Boon(float x, float y);
 	void CreateBullet();
 	void Update(float deltaTime) override;
+	void Draw() const override;
 };
 #endif // BOON_HPP

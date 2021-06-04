@@ -9,6 +9,7 @@ public:
 	static const int Price;
 	TCellTurret(float x, float y);
 	void CreateBullet() override;
+	void Draw() const override;
 	//void Update(float deltaTime) override;
 	void Hit(float damage) override;
 };

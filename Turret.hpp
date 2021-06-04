@@ -21,12 +21,11 @@ protected:
     // Reference: Design Patterns - Factory Method.
     virtual void CreateBullet() = 0;
     float hp;
-
 public:
     bool Enabled = true;
     bool Preview = false;
     Enemy* Target = nullptr;
-    Turret(/*std::string imgBase,*/std::string imgTurret, float x, float y,float radius, int price, float coolDown,float hp);
+    Turret(/*std::string imgBase*/std::string name ,std::string imgTurret, float x, float y,float radius, int price, float coolDown,float hp);
     void Update(float deltaTime) override;
     void Draw() const override;
 	int GetPrice() const;
@@ -34,5 +33,7 @@ public:
     virtual void OnExplode();
     std::list<Enemy*> lockedEnemys;
     std::list<EnemyBullet*> lockedEnemyBullets;
+    std::string name;
+    bool isboon = false;
 };
 #endif // TURRET_HPP

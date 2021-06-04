@@ -479,3 +479,10 @@ bool PlayScene::CheckSpaceValid(int x, int y) {
 	}
 	return true;
 }
+void PlayScene::ChangemapState(float mx, float my){
+	int x = mx / BlockSize;
+	int y = my / BlockSize;
+
+	mapState[y][x] = TILE_FLOOR;
+	return;
+}

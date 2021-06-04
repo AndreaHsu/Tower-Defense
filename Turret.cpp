@@ -23,8 +23,8 @@
 PlayScene* Turret::getPlayScene() {
 	return dynamic_cast<PlayScene*>(Engine::GameEngine::GetInstance().GetActiveScene());
 }
-Turret::Turret(std::string imgTurret, float x, float y,float radius, int price, float coolDown,float hp) :
-	Sprite(imgTurret, x, y), price(price), coolDown(coolDown),hp(hp) {
+Turret::Turret(std::string name,std::string imgTurret, float x, float y,float radius, int price, float coolDown,float hp) :
+	Sprite(imgTurret, x, y), price(price), coolDown(coolDown),hp(hp),name(name) {
 	CollisionRadius = radius;
 }
 void Turret::Update(float deltaTime) {
@@ -66,10 +66,10 @@ void Turret::Draw() const {
 		al_draw_filled_circle(Position.x, Position.y, CollisionRadius, al_map_rgba(0, 255, 0, 50));
 	}*/
 	Sprite::Draw();
-	/*if (PlayScene::DebugMode) {
+	if (PlayScene::DebugMode) {
 		// Draw target radius.
 		al_draw_circle(Position.x, Position.y, CollisionRadius, al_map_rgb(0, 0, 255), 2);
-	}*/
+	}
 }
 int Turret::GetPrice() const {
 	return price;
@@ -95,7 +95,9 @@ void Turret::Hit(float damage) {
 			it->Target = nullptr;
 		for (auto& it : lockedEnemyBullets)
 			it->Target = nullptr;
+		getPlayScene()->ChangemapState(Position.x, Position.y);
 		getPlayScene()->TowerGroup->RemoveObject(objectIterator);
+		//PlayScene::mapState[Position.y / PlayScene::BlockSize][Position.x / PlayScene::BlockSize] = PlayScene::TileType::TILE_FLOOR;
 		AudioHelper::PlayAudio("explosion.wav");
 	}
 }

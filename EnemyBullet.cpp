@@ -31,7 +31,7 @@ void EnemyBullet::Update(float deltaTime) {
 		Turret* turret = dynamic_cast<Turret*>(it);
 		if (!turret->Visible)
 			continue;
-		if (Engine::Collider::IsCircleOverlap(Position, CollisionRadius, turret->Position, turret->CollisionRadius)) {
+		if (Engine::Collider::IsCircleOverlap(Position, CollisionRadius, turret->Position, 0)) {
 			OnExplode(turret);
 			turret->Hit(damage);
 			getPlayScene()->EnemyBulletGroup->RemoveObject(objectIterator);

@@ -33,8 +33,8 @@ void Enemy::OnExplode() {
 		getPlayScene()->GroundEffectGroup->AddNewObject(new DirtyEffect("play/dirty-" + std::to_string(distId(rng)) + ".png", dist(rng), Position.x, Position.y));
 	}
 }
-Enemy::Enemy(std::string img, float x, float y, float radius, float speed, float hp, int money) :
-	Engine::Sprite(img, x, y), speed(speed), hp(hp), money(money) {
+Enemy::Enemy(std::string img, float x, float y, float radius, float speed, float hp, int money, std::string name):
+	Engine::Sprite(img, x, y), speed(speed), hp(hp), money(money),name(name) {
 	CollisionRadius = radius;
 	reachEndTime = 0;
 	Velocity = Engine::Point(speed , 0);
@@ -42,6 +42,9 @@ Enemy::Enemy(std::string img, float x, float y, float radius, float speed, float
 }
 void Enemy::Hit(float damage) {
 	hp -= damage;
+	if (name == "HomebodyEnemy") {
+		Velocity.x += 2000;
+	}
 
 	if (hp <= 0) {
 		OnExplode();
@@ -68,6 +71,13 @@ void Enemy::Update(float deltaTime) {
 		if(Engine::Collider::IsDirectOverlap(Position, turret->CollisionRadius, turret->Position)){
 			Position.x += Velocity.x * deltaTime;
 			Position.y -= Velocity.y * deltaTime;
+			reload -= deltaTime;
+			if (reload <= 0) {
+				// shoot.
+				reload = 0.1;
+				CreateBullet();
+
+			}
 		}
 	}
 	if (Target) {
@@ -77,12 +87,13 @@ void Enemy::Update(float deltaTime) {
 			lockedEnemyIterator = std::list<Enemy*>::iterator();
 		}
 		// Shoot reload.
-		reload -= deltaTime;
+		/*reload -= deltaTime;
 		if (reload <= 0) {
 			// shoot.
 			reload = 3;
 			CreateBullet();
-		}
+			
+		}*/
 	}
 	if (!Target) {
 		// Lock first seen target.
@@ -105,6 +116,10 @@ void Enemy::Update(float deltaTime) {
 	}
 	Engine::Point vec = target - Position;
 	reachEndTime = (vec.Magnitude() - remainSpeed) / speed;
+
+	if (name == "HomebodyEnemy" && Velocity.x != 80) {
+		Velocity.x = 80;
+	}
 }
 void Enemy::Draw() const {
 	Sprite::Draw();
