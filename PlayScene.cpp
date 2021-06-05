@@ -23,6 +23,7 @@
 #include "WBCellTurret.hpp"
 #include "RBCellTurret.hpp"
 #include "TCellTurret.hpp"
+#include "AcidCellTurret.hpp"
 #include "Boon.hpp"
 #include "Plane.hpp"
 #include "PlayScene.hpp"
@@ -301,6 +302,10 @@ void PlayScene::OnKeyDown(int keyCode) {
 		// Hotkey for PlateletTurret.
 		UIBtnClicked(4);
 	}
+	else if (keyCode == ALLEGRO_KEY_R) {
+		// Hotkey for PlateletTurret.
+		UIBtnClicked(5);
+	}
 	else if (keyCode >= ALLEGRO_KEY_0 && keyCode <= ALLEGRO_KEY_9) {
 		// Hotkey for Speed up.
 		SpeedMult = keyCode - ALLEGRO_KEY_0;
@@ -422,9 +427,15 @@ void PlayScene::ConstructUI() {
 	UIGroup->AddNewControlObject(btn);
 	//Button 5
 	btn = new TurretButton("play/floor.png", "play/dirt.png",
-		Engine::Sprite("play/bomb.png", 660, BlockSize * MapHeight, 0, 0, 0, 0)
-		, 650, 128 * MapHeight, Boon::Price);
+		Engine::Sprite("play/turret-5.png", 660, BlockSize * MapHeight, 0, 0, 0, 0)
+		, 650, 128 * MapHeight, AcidCellTurret::Price);
 	btn->SetOnClickCallback(std::bind(&PlayScene::UIBtnClicked, this, 4));
+	UIGroup->AddNewControlObject(btn);
+	//Button 6
+	btn = new TurretButton("play/floor.png", "play/dirt.png",
+		Engine::Sprite("play/bomb.png", 780, BlockSize * MapHeight, 0, 0, 0, 0)
+		, 770, 128 * MapHeight, Boon::Price);
+	btn->SetOnClickCallback(std::bind(&PlayScene::UIBtnClicked, this, 5));
 	UIGroup->AddNewControlObject(btn);
 	
 
@@ -450,7 +461,9 @@ void PlayScene::UIBtnClicked(int id) {
 		preview = new RBCellTurret(0, 0);
 	else if (id == 3 && money >= TCellTurret::Price)
 		preview = new TCellTurret(0, 0);
-	else if (id == 4 && money >= Boon::Price) {
+	else if (id == 4 && money >= AcidCellTurret::Price)
+		preview = new AcidCellTurret(0, 0);
+	else if (id == 5 && money >= Boon::Price) {
 		preview = new Boon(0, 0);
 		IsBoon = 1;
 	}

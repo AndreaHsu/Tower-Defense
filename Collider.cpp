@@ -25,7 +25,4 @@ namespace Engine {
 		float distance = c1.y - c2.y;
 		return c1.x > c2.x && (c1.x - r1) <= c2.x && distance<= PlayScene::BlockSize && 0 < distance;
 	}
-	/*bool Collider::IsKillerOverlap(Point c1, float r1, Point c2) {
-		return c1.x > c2.x && (c1.x - r1) <= c2.x && abs(c1.y - c2.y) < PlayScene::BlockSize / 2;
-	}*/
 }

@@ -19,7 +19,7 @@ void FrenchfriesBullet::OnExplode(Enemy* enemy) {
 	std::random_device dev;
 	std::mt19937 rng(dev());
 	std::uniform_int_distribution<std::mt19937::result_type> dist(2, 5);
-	enemy->Velocity = enemy->Velocity /2;
+	enemy->Velocity = enemy->Velocity /1.2;
 	getPlayScene()->GroundEffectGroup->AddNewObject(new DirtyEffect("play/dirty-3.png", dist(rng), enemy->Position.x, enemy->Position.y));
 }
 

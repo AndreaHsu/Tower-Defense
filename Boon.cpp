@@ -12,7 +12,7 @@
 #include "Collider.hpp"
 #include "Resources.hpp"
 
-const int Boon::Price = 20;
+const int Boon::Price = 15;
 Boon::Boon(float x, float y) :
 	// TODO 2 (2/8): You can imitate the 2 files: 'FreezeTurret.hpp', 'FreezeTurret.cpp' to create a new turret.
 	Turret("Boon","play/bomb.png", x, y,100, Price, 0.5,0) {
