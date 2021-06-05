@@ -247,9 +247,9 @@ void PlayScene::OnMouseUp(int button, int mx, int my) {
 			// Remove Preview.
 			preview = nullptr;
 
-			mapState[y][x] = TILE_OCCUPIED;
+			if(!IsBoon) mapState[y][x] = TILE_OCCUPIED;
+			else IsBoon = 0;
 			OnMouseMove(mx, my);
-			IsBoon = 0;
 		}
 	}
 }
@@ -500,5 +500,6 @@ void PlayScene::ChangemapState(float mx, float my){
 	int y = my / BlockSize;
 
 	mapState[y][x] = TILE_FLOOR;
+
 	return;
 }

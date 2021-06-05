@@ -78,7 +78,7 @@ void Enemy::Update(float deltaTime) {
 		Turret* turret = dynamic_cast<Turret*>(it);
 		if (!turret->Visible)
 			continue;
-		if(Engine::Collider::IsDirectOverlap(Position, turret->CollisionRadius, turret->Position)){
+		if(Engine::Collider::IsDirectOverlap(Position, turret->CollisionRadius+80, turret->Position)){
 			StopEnemyFlag = true;
 			Position.x += Velocity.x * deltaTime;
 			Position.y -= Velocity.y * deltaTime;
