@@ -59,6 +59,9 @@ void PlayScene::Initialize() {
 	SpeedMult = 1;
 	laneNum = std::vector<int>(MapHeight);
 	std::iota(laneNum.begin(), laneNum.end(), 0);
+	//TODO by andrea:lane killer bool
+	islaneKiller = std::vector<bool>(MapHeight,false);
+
 	// Add groups from bottom to top.
 	AddNewObject(TileMapGroup = new Group());
 	AddNewObject(GroundEffectGroup = new Group());
@@ -309,16 +312,16 @@ void PlayScene::Hit() {
 		UILives->Text = std::string("Life: ") + std::to_string(this->lives);
 		// Free resources.
 		if (lives == 0) {
-			/*delete TileMapGroup;
-			delete GroundEffectGroup;
-			delete DebugIndicatorGroup;
-			delete TowerGroup;
-			delete EnemyGroup;
-			delete BulletGroup;
-			delete EffectGroup;
-			delete EnemyBulletGroup;
+			/*delete imgTarget;
 			delete UIGroup;
-			delete imgTarget;*/
+			delete EnemyBulletGroup;
+			delete EffectGroup;
+			delete BulletGroup;
+			delete EnemyGroup;
+			delete TowerGroup;
+			delete DebugIndicatorGroup;
+			delete GroundEffectGroup;
+			delete TileMapGroup;*/
 			Engine::GameEngine::GetInstance().ChangeScene("lose");
 		}
 		//lose

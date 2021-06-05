@@ -46,6 +46,7 @@ namespace Engine {
 		static bool IsCircleOverlap(Point c1, float r1, Point c2, float r2);
 		///Check if direct distance overlaps
 		static bool IsDirectOverlap(Point c1, float r1, Point c2);
+		static bool IsKillerOverlap(Point c1, float r1, Point c2);
 	};
 }
 #endif // COLLIDER_HPP

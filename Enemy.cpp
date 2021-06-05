@@ -18,6 +18,7 @@
 #include "Turret.hpp"
 #include "Collider.hpp"
 #include "EnemyFireBullet.hpp"
+#include "Killer.hpp"
 
 PlayScene* Enemy::getPlayScene() {
 	return dynamic_cast<PlayScene*>(Engine::GameEngine::GetInstance().GetActiveScene());
@@ -108,6 +109,14 @@ void Enemy::Update(float deltaTime) {
 				lockedEnemyIterator = std::prev(Target->lockedEnemys.end());
 				break;
 			}
+		}
+	}
+	//TODO by andrea:for killer 
+	if (Position.x <  PlayScene::BlockSize) {
+		if (!getPlayScene()->islaneKiller.at((int)Position.y / PlayScene::BlockSize)) {
+			getPlayScene()->islaneKiller.at((int)Position.y / PlayScene::BlockSize) = true;
+			getPlayScene()->EffectGroup->AddNewObject(new Killer(0, PlayScene::BlockSize* ((int)Position.y / PlayScene::BlockSize)));
+			return;
 		}
 	}
 	if(Position.x <= PlayScene::EndGridPointx * PlayScene::BlockSize + PlayScene::BlockSize / 2){

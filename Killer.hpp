@@ -7,6 +7,7 @@ class PlayScene;
 class Killer: public Engine::Sprite {
 protected:
 	PlayScene* getPlayScene();
+
 public:
     Killer(float x, float y);
 	void Update(float deltaTime) override;

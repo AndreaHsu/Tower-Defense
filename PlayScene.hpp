@@ -60,6 +60,7 @@ public:
 	Turret* preview;
 	std::vector<std::vector<TileType>> mapState;
 	std::vector<int> laneNum;
+	std::vector<bool> islaneKiller;
 	std::list<std::tuple<int, float,int>> enemyWaveData;
 	std::list<int> keyStrokes;
 	static Engine::Point GetClientSize();

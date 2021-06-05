@@ -22,7 +22,7 @@ protected:
 	virtual void OnExplode();
 	std::list<Enemy*>::iterator lockedEnemyIterator;
 	float reload = 0;
-	std::string name;
+	//std::string name;
 public:
 	float reachEndTime;
 	std::list<Turret*> lockedTurrets;
@@ -35,5 +35,6 @@ public:
 	virtual void CreateBullet() ;
 	Turret* Target = nullptr;
 	bool StopEnemyFlag;
+	std::string name;
 };
 #endif // ENEMY_HPP
