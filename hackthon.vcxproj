@@ -164,6 +164,7 @@
     <ClCompile Include="FrenchfriesBullet.cpp" />
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="Group.cpp" />
+    <ClCompile Include="HeadEnemy.cpp" />
     <ClCompile Include="HomebodyEnemy.cpp" />
     <ClCompile Include="IceCreamBullet.cpp" />
     <ClCompile Include="IControl.cpp" />
@@ -213,6 +214,7 @@
     <ClInclude Include="FrenchfriesBullet.hpp" />
     <ClInclude Include="GameEngine.hpp" />
     <ClInclude Include="Group.hpp" />
+    <ClInclude Include="HeadEnemy.hpp" />
     <ClInclude Include="HomebodyEnemy.hpp" />
     <ClInclude Include="IceCreamBullet.hpp" />
     <ClInclude Include="IControl.hpp" />

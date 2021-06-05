@@ -43,7 +43,7 @@ Enemy::Enemy(std::string img, float x, float y, float radius, float speed, float
 }
 void Enemy::Hit(float damage) {
 	hp -= damage;
-	if (name == "HomebodyEnemy") {
+	if (name == "HeadEnemy") {
 		Velocity.x += 2000;
 	}
 
@@ -128,7 +128,7 @@ void Enemy::Update(float deltaTime) {
 	Engine::Point vec = target - Position;
 	reachEndTime = (vec.Magnitude() - remainSpeed) / speed;
 
-	if (name == "HomebodyEnemy" && Velocity.x != 80) {
+	if (name == "HeadEnemy" && Velocity.x != 80) {
 		Velocity.x = 80;
 	}
 }

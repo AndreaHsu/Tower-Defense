@@ -31,6 +31,7 @@
 #include "SofaEnemy.hpp"
 #include "StrongEnemy.hpp"
 #include "HomebodyEnemy.hpp"
+#include "HeadEnemy.hpp"
 #include "Sprite.hpp"
 #include "Turret.hpp"
 #include "TurretButton.hpp"
@@ -176,6 +177,9 @@ void PlayScene::Update(float deltaTime) {
 					// TODO 2 (8/8): Enable the creation of the 4th enemy.
 				case 4:
 					EnemyGroup->AddNewObject(enemy = new HomebodyEnemy(SpawnCoordinate.x, SpawnCoordinate.y));
+					break;
+				case 5:
+					EnemyGroup->AddNewObject(enemy = new HeadEnemy(SpawnCoordinate.x, SpawnCoordinate.y));
 					break;
 				default:
 					continue;
