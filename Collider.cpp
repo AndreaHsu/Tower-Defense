@@ -3,6 +3,7 @@
 
 #include "Collider.hpp"
 #include "Point.hpp"
+#include "PlayScene.hpp"
 
 namespace Engine {
 	bool Collider::IsPointInBitmap(Point pnt, const std::shared_ptr<ALLEGRO_BITMAP>& bmp) {
@@ -18,6 +19,6 @@ namespace Engine {
 		return (c1 - c2).Magnitude() < r1 + r2;
 	}
 	bool Collider::IsDirectOverlap(Point c1, float r1, Point c2) {
-		return c1.x > c2.x && (c1.x - r1) <= c2.x && (c1.y == c2.y);
+		return c1.x > c2.x && (c1.x - r1) <= c2.x && abs(c1.y - c2.y) < PlayScene::BlockSize/2;
 	}
 }

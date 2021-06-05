@@ -18,7 +18,7 @@ Bullet::Bullet(std::string img, float speed, float damage, Engine::Point positio
 	Sprite(img, position.x, position.y), speed(speed), damage(damage), parent(parent) {
 	Velocity = forwardDirection * speed;
 	Rotation = rotation;
-	CollisionRadius = 4;
+	CollisionRadius = 10;
 }
 void Bullet::Update(float deltaTime) {
 	Sprite::Update(deltaTime);

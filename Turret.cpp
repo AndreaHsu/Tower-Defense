@@ -91,8 +91,10 @@ void Turret::Hit(float damage) {
 	if (hp <= 0) {
 		OnExplode();
 		// Remove all turret's reference to target.
-		for (auto& it : lockedEnemys)
+		for (auto& it : lockedEnemys) {
 			it->Target = nullptr;
+			it->StopEnemyFlag = false;
+		}
 		for (auto& it : lockedEnemyBullets)
 			it->Target = nullptr;
 		getPlayScene()->ChangemapState(Position.x, Position.y);

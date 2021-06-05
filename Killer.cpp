@@ -21,4 +21,5 @@ PlayScene* Killer::getPlayScene() {
 Killer::Killer(float x, float y) : Sprite("play/killer.png", x, y, 0, 0, 0, 0){
 }
 void Killer::Update(float deltaTime){
+	
 }

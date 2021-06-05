@@ -34,5 +34,6 @@ public:
 	friend  class TCellTurret;
 	virtual void CreateBullet() ;
 	Turret* Target = nullptr;
+	bool StopEnemyFlag;
 };
 #endif // ENEMY_HPP

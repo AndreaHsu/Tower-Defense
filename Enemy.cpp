@@ -34,7 +34,7 @@ void Enemy::OnExplode() {
 	}
 }
 Enemy::Enemy(std::string img, float x, float y, float radius, float speed, float hp, int money, std::string name):
-	Engine::Sprite(img, x, y), speed(speed), hp(hp), money(money),name(name) {
+	Engine::Sprite(img, x, y), speed(speed), hp(hp), money(money),name(name),StopEnemyFlag(false) {
 	CollisionRadius = radius;
 	reachEndTime = 0;
 	Velocity = Engine::Point(speed , 0);
@@ -61,7 +61,16 @@ void Enemy::Hit(float damage) {
 void Enemy::Update(float deltaTime) {
 	float remainSpeed = speed * deltaTime;
 	Position.x -= Velocity.x * deltaTime;
-	Position.y += Velocity.y * deltaTime;
+	if (name == "HomebodyEnemy" && !StopEnemyFlag) {
+		Position.y += cos(Position.x / 20) * deltaTime *80;
+	}else Position.y += Velocity.y * deltaTime;
+	/*Engine::Point Size = PlayScene::GetClientSize();
+	if (Position.y <= PlayScene::BlockSize/2 ) {
+		Velocity.y = 0-Velocity.y;
+	}
+	else if (Position.y >= Size.y- PlayScene::BlockSize / 2) {
+		Velocity.y = 0 - Velocity.y;
+	}*/
 	//stop enemy
 	PlayScene* scene = getPlayScene();
 	for (auto& it : scene->TowerGroup->GetObjects()) {
@@ -69,12 +78,13 @@ void Enemy::Update(float deltaTime) {
 		if (!turret->Visible)
 			continue;
 		if(Engine::Collider::IsDirectOverlap(Position, turret->CollisionRadius, turret->Position)){
+			StopEnemyFlag = true;
 			Position.x += Velocity.x * deltaTime;
 			Position.y -= Velocity.y * deltaTime;
 			reload -= deltaTime;
 			if (reload <= 0) {
 				// shoot.
-				reload = 0.1;
+				reload = 0.3;
 				CreateBullet();
 
 			}
@@ -86,14 +96,6 @@ void Enemy::Update(float deltaTime) {
 			Target = nullptr;
 			lockedEnemyIterator = std::list<Enemy*>::iterator();
 		}
-		// Shoot reload.
-		/*reload -= deltaTime;
-		if (reload <= 0) {
-			// shoot.
-			reload = 3;
-			CreateBullet();
-			
-		}*/
 	}
 	if (!Target) {
 		// Lock first seen target.
