@@ -156,6 +156,7 @@
     <ClCompile Include="Boon.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="DeadEnemy.cpp" />
     <ClCompile Include="DirtyEffect.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyBullet.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="Boon.hpp" />
     <ClInclude Include="Bullet.hpp" />
     <ClInclude Include="Collider.hpp" />
+    <ClInclude Include="DeadEnemy.hpp" />
     <ClInclude Include="DirtyEffect.hpp" />
     <ClInclude Include="Enemy.hpp" />
     <ClInclude Include="EnemyBullet.hpp" />

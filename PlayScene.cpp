@@ -32,6 +32,7 @@
 #include "StrongEnemy.hpp"
 #include "HomebodyEnemy.hpp"
 #include "HeadEnemy.hpp"
+#include "DeadEnemy.hpp"
 #include "Sprite.hpp"
 #include "Turret.hpp"
 #include "TurretButton.hpp"
@@ -180,6 +181,9 @@ void PlayScene::Update(float deltaTime) {
 					break;
 				case 5:
 					EnemyGroup->AddNewObject(enemy = new HeadEnemy(SpawnCoordinate.x, SpawnCoordinate.y));
+					break;
+				case 6:
+					EnemyGroup->AddNewObject(enemy = new DeadEnemy(SpawnCoordinate.x, SpawnCoordinate.y));
 					break;
 				default:
 					continue;

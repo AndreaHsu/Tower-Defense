@@ -13,5 +13,5 @@ public:
 	explicit EnemyFireBullet(Engine::Point position, Engine::Point forwardDirection, float rotation, Enemy* parent);
 	void OnExplode(Turret* turret) override;
 };
-#endif // ICECREAMBULLET_HPP
+#endif // ENEMYFIREBULLET_HPP
 

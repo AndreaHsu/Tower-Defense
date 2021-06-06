@@ -87,7 +87,8 @@ void Enemy::Update(float deltaTime) {
 			reload -= deltaTime;
 			if (reload <= 0) {
 				// shoot.
-				reload = 0.3;
+				if (name == "DeadEnemy") reload = 5;
+				else reload = 0.3;
 				CreateBullet();
 
 			}
@@ -132,7 +133,6 @@ void Enemy::Update(float deltaTime) {
 
 	if (name == "HeadEnemy" && Velocity.x != 80) {
 		Velocity.x = 80;
-		//bmp = Engine::Resources::GetInstance().GetBitmap("play/enemy-4.png");
 	}
 }
 void Enemy::Draw() const {
@@ -145,6 +145,7 @@ void Enemy::Draw() const {
 void Enemy::CreateBullet() {
 	Engine::Point diff = Engine::Point(1, 0);
 	float rotation = ALLEGRO_PI / 2;
-	getPlayScene()->EnemyBulletGroup->AddNewObject(new EnemyFireBullet(Position, diff, rotation, this));
+	/*if(name == "DeadEnemy") getPlayScene()->EnemyBulletGroup->AddNewObject(new EnemyAlchoBullet(Position, diff, rotation, this));
+	else */getPlayScene()->EnemyBulletGroup->AddNewObject(new EnemyFireBullet(Position, diff, rotation, this));
 	AudioHelper::PlayAudio("gun.wav");
 }

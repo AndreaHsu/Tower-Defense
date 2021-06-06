@@ -8,14 +8,15 @@
 #include "PlayScene.hpp"
 #include "Point.hpp"
 #include "Sprite.hpp"
+#include "DeadEnemy.hpp"
 
 PlayScene* EnemyBullet::getPlayScene() {
 	return dynamic_cast<PlayScene*>(Engine::GameEngine::GetInstance().GetActiveScene());
 }
 void EnemyBullet::OnExplode(Turret* turret) {
 }
-EnemyBullet::EnemyBullet(std::string img, float speed, float damage, Engine::Point position, Engine::Point forwardDirection, float rotation, Enemy* parent) :
-	Sprite(img, position.x, position.y), speed(speed), damage(damage), parent(parent) {
+EnemyBullet::EnemyBullet(std::string img, float speed, float damage, Engine::Point position, Engine::Point forwardDirection, float rotation, Enemy* parent,std::string name) :
+	Sprite(img, position.x, position.y), speed(speed), damage(damage), parent(parent),name(name) {
 	Velocity = forwardDirection * speed;
 	Rotation = rotation;
 	CollisionRadius = 4;
@@ -32,8 +33,16 @@ void EnemyBullet::Update(float deltaTime) {
 		if (!turret->Visible)
 			continue;
 		if (Engine::Collider::IsCircleOverlap(Position, CollisionRadius, turret->Position, /*turret->CollisionRadius*/30)) {
-			OnExplode(turret);
-			turret->Hit(damage);
+			if (parent->name == "DeadEnemy") {
+				Engine::Point newposition = turret->Position;
+				OnExplode(turret);
+				turret->Hit(100);
+				getPlayScene()->EnemyGroup->AddNewObject(new DeadEnemy(newposition.x,newposition.y));
+			}
+			else {
+				OnExplode(turret);
+				turret->Hit(damage);
+			}
 			getPlayScene()->EnemyBulletGroup->RemoveObject(objectIterator);
 			return;
 		}

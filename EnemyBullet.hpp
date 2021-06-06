@@ -18,9 +18,10 @@ protected:
 	Enemy* parent;
 	PlayScene* getPlayScene();
 	virtual void OnExplode(Turret* turret);
+	std::string name;
 public:
 	Turret* Target = nullptr;
-	explicit EnemyBullet(std::string img, float speed, float damage, Engine::Point position, Engine::Point forwardDirection, float rotation, Enemy* parent);
+	explicit EnemyBullet(std::string img, float speed, float damage, Engine::Point position, Engine::Point forwardDirection, float rotation, Enemy* parent, std::string name);
 	void Update(float deltaTime) override;
 };
 #endif // ENEMYBULLET_HPP
