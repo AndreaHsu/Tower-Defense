@@ -14,7 +14,6 @@ class Turret;
 
 PockyBullet::PockyBullet(Engine::Point position, Engine::Point forwardDirection, float rotation, Turret* parent) :
 	Bullet("play/bullet-2.png", 800, 1, position, forwardDirection, rotation - ALLEGRO_PI / 2, parent) {
-	//getPlayScene()->EffectGroup->AddNewObject(new ShootingEffect(Position.x, Position.y));
 }
 void PockyBullet::OnExplode(Enemy* enemy) {
 	std::random_device dev;

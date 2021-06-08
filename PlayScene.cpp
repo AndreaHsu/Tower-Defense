@@ -62,7 +62,7 @@ void PlayScene::Initialize() {
 	SpeedMult = 1;
 	laneNum = std::vector<int>(MapHeight);
 	std::iota(laneNum.begin(), laneNum.end(), 0);
-	//TODO by andrea:lane killer bool
+	//lane killer bool
 	islaneKiller = std::vector<bool>(MapHeight,false);
 
 	// Add groups from bottom to top.

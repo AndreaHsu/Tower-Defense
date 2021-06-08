@@ -22,7 +22,6 @@ EnemyBullet::EnemyBullet(std::string img, float speed, float damage, Engine::Poi
 	CollisionRadius = 4;
 }
 void EnemyBullet::Update(float deltaTime) {
-	//Sprite::Update(deltaTime);
 	Position.x -= Velocity.x * deltaTime;
 	Position.y += Velocity.y * deltaTime;
 	PlayScene* scene = getPlayScene();
@@ -33,6 +32,7 @@ void EnemyBullet::Update(float deltaTime) {
 		if (!turret->Visible)
 			continue;
 		if (Engine::Collider::IsCircleOverlap(Position, CollisionRadius, turret->Position, /*turret->CollisionRadius*/30)) {
+			//BONUS:change turret to enemy when the certain enemy shoot
 			if (parent->name == "DeadEnemy") {
 				Engine::Point newposition = turret->Position;
 				OnExplode(turret);

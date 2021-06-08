@@ -19,24 +19,7 @@ TCellTurret::TCellTurret(float x, float y) :
 	// Move center downward, since we the turret head is slightly biased upward.
 	Anchor.y += 8.0f / GetBitmapHeight();
 }
-/*void TCellTurret::Update(float deltaTime) {
-	Sprite::Update(deltaTime);
-	PlayScene* scene = getPlayScene();
-	if (!Enabled)
-		return;
-	for (auto& it : scene->EnemyGroup->GetObjects()) {
-		Enemy* enemy = dynamic_cast<Enemy*>(it);
-		if (!enemy->Visible)
-			continue;
-		if (Engine::Collider::IsCircleOverlap(Position, CollisionRadius, enemy->Position, enemy->CollisionRadius)) {
-			//flag = 1;
-			enemy->OnExplode();
-			enemy->Hit(100);
-			return;
-		}
-	}
-	if(flag) getPlayScene()->TowerGroup->RemoveObject(objectIterator);
-}*/
+
 void TCellTurret::Draw() const {
 	/*if (Preview) {
 		al_draw_filled_circle(Position.x, Position.y, CollisionRadius, al_map_rgba(0, 255, 0, 50));
@@ -61,10 +44,8 @@ void TCellTurret::Hit(float damage) {
 				if (!enemy->Visible)
 					continue;
 				if (Engine::Collider::IsCircleOverlap(Position, CollisionRadius, enemy->Position, enemy->CollisionRadius)) {
-					//flag = 1;
 					enemy->OnExplode();
 					enemy->Hit(100);
-					//return;
 				}
 			}
 		}
@@ -75,6 +56,5 @@ void TCellTurret::Hit(float damage) {
 }
 
 void TCellTurret::CreateBullet() {
-	//AudioHelper::PlayAudio("gun.wav");
 	return;
 }

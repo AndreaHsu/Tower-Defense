@@ -44,6 +44,7 @@ Enemy::Enemy(std::string img, float x, float y, float radius, float speed, float
 }
 void Enemy::Hit(float damage) {
 	hp -= damage;
+	//BONUS:change enemy img and increase its velocity
 	if (name == "HeadEnemy") {
 		Velocity.x += 2000;
 		if(hp <=5) bmp = Engine::Resources::GetInstance().GetBitmap("play/enemy-4-2.png");
@@ -64,16 +65,11 @@ void Enemy::Hit(float damage) {
 void Enemy::Update(float deltaTime) {
 	float remainSpeed = speed * deltaTime;
 	Position.x -= Velocity.x * deltaTime;
+	//BONUS:change the moving method of y-coordinate of enemy
 	if (name == "HomebodyEnemy" && !StopEnemyFlag) {
 		Position.y += cos(Position.x / 20) * deltaTime *80;
 	}else Position.y += Velocity.y * deltaTime;
-	/*Engine::Point Size = PlayScene::GetClientSize();
-	if (Position.y <= PlayScene::BlockSize/2 ) {
-		Velocity.y = 0-Velocity.y;
-	}
-	else if (Position.y >= Size.y- PlayScene::BlockSize / 2) {
-		Velocity.y = 0 - Velocity.y;
-	}*/
+	
 	//stop enemy
 	PlayScene* scene = getPlayScene();
 	for (auto& it : scene->TowerGroup->GetObjects()) {
@@ -114,7 +110,7 @@ void Enemy::Update(float deltaTime) {
 			}
 		}
 	}
-	//TODO by andrea:for killer 
+	//call killer 
 	if (Position.x <  PlayScene::BlockSize/2) {
 		if (!getPlayScene()->islaneKiller.at((int)Position.y / PlayScene::BlockSize)) {
 			getPlayScene()->islaneKiller.at((int)Position.y / PlayScene::BlockSize) = true;
@@ -145,7 +141,6 @@ void Enemy::Draw() const {
 void Enemy::CreateBullet() {
 	Engine::Point diff = Engine::Point(1, 0);
 	float rotation = ALLEGRO_PI / 2;
-	/*if(name == "DeadEnemy") getPlayScene()->EnemyBulletGroup->AddNewObject(new EnemyAlchoBullet(Position, diff, rotation, this));
-	else */getPlayScene()->EnemyBulletGroup->AddNewObject(new EnemyFireBullet(Position, diff, rotation, this));
+	getPlayScene()->EnemyBulletGroup->AddNewObject(new EnemyFireBullet(Position, diff, rotation, this));
 	AudioHelper::PlayAudio("gun.wav");
 }

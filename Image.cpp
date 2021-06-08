@@ -37,7 +37,4 @@ namespace Engine {
 	int Image::GetBitmapHeight() const {
 		return al_get_bitmap_height(bmp.get());
 	}
-	/*void Image::ChangeImage(std::string img) {
-		bmp = Resources::GetInstance().GetBitmap(img);
-	}*/
 }

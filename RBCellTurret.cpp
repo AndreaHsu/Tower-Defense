@@ -19,6 +19,4 @@ RBCellTurret::RBCellTurret(float x, float y) :
 void RBCellTurret::CreateBullet() {
 	Engine::Point diff = Engine::Point(1, 0);
 	float rotation = ALLEGRO_PI / 2;
-	//getPlayScene()->BulletGroup->AddNewObject(new FrenchfriesBullet(Position, diff, rotation, this));
-	//AudioHelper::PlayAudio("missile.wav");
 }
